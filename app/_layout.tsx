@@ -31,7 +31,7 @@ export default function RootLayout() {
 
         if (user && !inAuthGroup) {
             console.log("Navigating to Home");
-            router.replace("/(tabs)/Home");
+            router.replace("/(tabs)/Java");
         } else if (!user && inAuthGroup) {
             console.log("Navigating to Index");
             router.replace("/");
@@ -46,6 +46,7 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" />
             <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="(info)" />
         </Stack>
     );
 }
