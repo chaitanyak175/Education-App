@@ -6,7 +6,7 @@ import { javaInformation } from '@/constants/Information'
 
 const Page = () => {
   return (
-    <ScrollViewComponent data={javaInformation.topics}/>
+    <ScrollViewComponent data={javaInformation.topics} language='java'/>
   )
 }
 

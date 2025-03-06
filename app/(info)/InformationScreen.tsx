@@ -7,7 +7,7 @@ import { useLocalSearchParams } from "expo-router";
 const Page = () => {
 
     // In Page.tsx
-    const { data, title } = useLocalSearchParams();
+    const { data, title,language } = useLocalSearchParams();
     const parsedData = data ? JSON.parse(data as string) : null;
 
     // Find the selected topic based on the title
@@ -18,7 +18,7 @@ const Page = () => {
 
     return (
         <ScrollView>
-            <InformationCard data={selectedTopic} title={title as string}>
+            <InformationCard data={selectedTopic} title={title as string} language={language as string}>
             </InformationCard>
         </ScrollView>
     )

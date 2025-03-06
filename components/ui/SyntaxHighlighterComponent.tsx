@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { github } from 'react-syntax-highlighter/styles/hljs';
 
-const SyntaxHighlighterComponent = ({ data }: { data: string }) => {
+const SyntaxHighlighterComponent = ({ data, language }: { data: string, language: string }) => {
     // First check: if data is undefined or null, return a fallback
     if (!data) {
         return (
@@ -17,7 +17,7 @@ const SyntaxHighlighterComponent = ({ data }: { data: string }) => {
         // Use a different style (github) which is more likely to be available
         return (
             <SyntaxHighlighter
-                language="java"
+                language={language}
                 style={github}
                 customStyle={styles.codeContainer}
             // Important: Remove this prop as it might be causing issues

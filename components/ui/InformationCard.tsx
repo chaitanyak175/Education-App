@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import SyntaxHighlighterComponent from './SyntaxHighlighterComponent';
 
-const InformationCard = ({ data, title }: { data: any, title: string }) => {
+const InformationCard = ({ data, title,language }: { data: any, title: string,language:string }) => {
     // Safely log data - prevent potential errors
     console.log('The data from InformationCard is: ', data || 'No data');
     console.log('The data subtopics from InformationCard is: ', data?.subtopics || 'No subtopics');
@@ -32,7 +32,7 @@ const InformationCard = ({ data, title }: { data: any, title: string }) => {
                                 {/* <Text style={styles.example}>{subtopic.example}</Text> */}
 
                                 {/* Only render SyntaxHighlighter if we have an example */}
-                                <SyntaxHighlighterComponent data={subtopic.example} />
+                                <SyntaxHighlighterComponent data={subtopic.example} language={language} />
                             </View>
                         ) : (
                             <Text style={styles.noExample}>No example available</Text>

@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter } from 'expo-router'
 import InformationCard from './InformationCard'
 
-const ScrollViewComponent = ({ data }: any) => {
+const ScrollViewComponent = ({ data, language }: any) => {
     const router = useRouter()
     console.log("data in ScrollViewComponent", data)
 
@@ -13,7 +13,8 @@ const ScrollViewComponent = ({ data }: any) => {
             pathname: "/(info)/InformationScreen",
             params: {
                 data: JSON.stringify(data),
-                title: topicName
+                title: topicName,
+                language: language
             }
         });
     }
