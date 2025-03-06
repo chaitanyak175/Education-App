@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import InformationCard from '@/components/ui/InformationCard'
 import { useLocalSearchParams } from "expo-router";
@@ -17,8 +17,10 @@ const Page = () => {
     console.log('Selected topic subtopics:', selectedTopic?.subtopics);
 
     return (
-        <InformationCard data={selectedTopic} title={title as string}>
-        </InformationCard>
+        <ScrollView>
+            <InformationCard data={selectedTopic} title={title as string}>
+            </InformationCard>
+        </ScrollView>
     )
 }
 

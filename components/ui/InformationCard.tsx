@@ -1,27 +1,50 @@
-// In InformationCard.tsx
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import SyntaxHighlighterComponent from './SyntaxHighlighterComponent';
 
-const InformationCard = ({ data, title }: { data: any, title: any }) => {
-    console.log('The data from InformationCard is : ', data);
-    console.log('The data subtopics from InformationCard is : ', data?.subtopics);
+const InformationCard = ({ data, title }: { data: any, title: string }) => {
+    // Safely log data - prevent potential errors
+    console.log('The data from InformationCard is: ', data || 'No data');
+    console.log('The data subtopics from InformationCard is: ', data?.subtopics || 'No subtopics');
+
+    // If no data is provided, show a fallback UI
+    if (!data) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>{title || 'Information'}</Text>
+                <Text>No information available</Text>
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
-            {data?.subtopics && data.subtopics.map((subtopic: any, index: any) => (
-                <View key={index} style={styles.subtopicContainer}>
-                    <Text style={styles.subtopicName}>{subtopic.name}</Text>
-                    <Text style={styles.description}>{subtopic.description}</Text>
-                    <View style={styles.exampleContainer}>
-                        <Text style={styles.exampleTitle}>Example:</Text>
-                        <Text style={styles.example}>{subtopic.example}</Text>
+            {data?.subtopics && data.subtopics.length > 0 ? (
+                data.subtopics.map((subtopic: any, index: number) => (
+                    <View key={index} style={styles.subtopicContainer}>
+                        <Text style={styles.subtopicName}>{subtopic.name || 'Untitled'}</Text>
+                        <Text style={styles.description}>{subtopic.description || 'No description available'}</Text>
+
+                        {subtopic.example ? (
+                            <View style={styles.exampleContainer}>
+                                <Text style={styles.exampleTitle}>Example:</Text>
+                                {/* <Text style={styles.example}>{subtopic.example}</Text> */}
+
+                                {/* Only render SyntaxHighlighter if we have an example */}
+                                <SyntaxHighlighterComponent data={subtopic.example} />
+                            </View>
+                        ) : (
+                            <Text style={styles.noExample}>No example available</Text>
+                        )}
                     </View>
-                </View>
-            ))}
+                ))
+            ) : (
+                <Text>No subtopics available</Text>
+            )}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -63,7 +86,12 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'monospace',
         color: 'white',
+        marginBottom: 8,
+    },
+    noExample: {
+        fontStyle: 'italic',
+        color: '#666',
     }
 });
 
-export default InformationCard
+export default InformationCard;
