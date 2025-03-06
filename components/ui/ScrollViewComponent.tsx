@@ -47,19 +47,18 @@ export default ScrollViewComponent
 const styles = StyleSheet.create({
     flatList: {
         padding: 30,
-        backgroundColor: '#4B0082',
+        backgroundColor: 'black',
         flexDirection: 'column',
-        gap: 40
+        gap: 40,
+        paddingVertical: 0
 
     },
     flatListElement: {
         paddingVertical: 20,
-        backgroundColor: '#E6E6FA',
+        backgroundColor: '#C7F000',
         borderRadius: 9,
-        marginVertical: 3,
+        marginVertical: 7,
         paddingHorizontal: 20,
-
-
     },
     flatListTitle: {
         fontSize: 20

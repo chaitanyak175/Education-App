@@ -61,7 +61,7 @@ const Layout = () => {
                     ),
 
                 }} />
-            <Tabs.Screen name='InformationScreen' />
+
 
 
 

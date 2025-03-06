@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+// Import Clipboard from the recommended package
+import Clipboard from '@react-native-clipboard/clipboard';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { github } from 'react-syntax-highlighter/styles/hljs';
 
-const SyntaxHighlighterComponent = ({ data, language }: { data: string, language: string }) => {
-    // First check: if data is undefined or null, return a fallback
+const SyntaxHighlighterComponent = ({ data, language = 'javascript' }: { data: string, language?: string }) => {
+    // Return fallback if no data is provided
     if (!data) {
         return (
             <View style={styles.fallbackContainer}>
@@ -13,24 +15,38 @@ const SyntaxHighlighterComponent = ({ data, language }: { data: string, language
         );
     }
 
+    // Function to copy the code to clipboard
+    const handleCopy = () => {
+        Clipboard.setString(data);
+        Alert.alert('Copied to clipboard!');
+    };
+
     try {
-        // Use a different style (github) which is more likely to be available
         return (
-            <SyntaxHighlighter
-                language={language}
-                style={github}
-                customStyle={styles.codeContainer}
-            // Important: Remove this prop as it might be causing issues
-            // highlighter="prism" 
-            >
-                {data}
-            </SyntaxHighlighter>
+            <View style={styles.container}>
+                <View style={styles.exampleHeader}>
+
+                    <Text style={styles.exampleTitle}>Example:</Text>
+                    <TouchableOpacity onPress={handleCopy} style={styles.copyButtonContainer}>
+                        <Text style={styles.copyButtonText}>Copy</Text>
+                    </TouchableOpacity>
+                </View>
+                <SyntaxHighlighter
+                    language={language}
+                    style={github}
+                    customStyle={styles.codeContainer}
+                >
+                    {data}
+                </SyntaxHighlighter>
+            </View>
         );
     } catch (error) {
-        // Fallback if the syntax highlighter fails
         console.log('Syntax highlighter error:', error);
         return (
             <View style={styles.fallbackContainer}>
+                <TouchableOpacity onPress={handleCopy} style={styles.copyButtonContainer}>
+                    <Text style={styles.copyButtonText}>Copy</Text>
+                </TouchableOpacity>
                 <Text style={styles.codeText}>{data}</Text>
             </View>
         );
@@ -38,6 +54,9 @@ const SyntaxHighlighterComponent = ({ data, language }: { data: string, language
 };
 
 const styles = StyleSheet.create({
+    container: {
+        marginBottom: 16,
+    },
     codeContainer: {
         margin: 0,
         padding: 10,
@@ -49,6 +68,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#ddd',
+        marginBottom: 16,
     },
     fallbackText: {
         fontFamily: 'monospace',
@@ -57,7 +77,27 @@ const styles = StyleSheet.create({
     codeText: {
         fontFamily: 'monospace',
         color: '#333',
-    }
+    },
+    copyButtonContainer: {
+        alignSelf: 'flex-end',
+        paddingVertical: 4,
+        paddingHorizontal: 8,
+        backgroundColor: '#007bff',
+        borderRadius: 4,
+        marginBottom: 20,
+    },
+    copyButtonText: {
+        color: '#fff',
+        fontSize: 14,
+    },
+    exampleTitle: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: "black",
+        marginBottom: 0,
+    },
+
+    exampleHeader: { flex: 1, flexDirection: 'row', justifyContent: "space-between" }
 });
 
 export default SyntaxHighlighterComponent;

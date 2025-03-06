@@ -46,47 +46,53 @@ const index = () => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
             <View style={styles.mainView}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.fieldsView}>
-                        <Text>Email</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={email}
-                            onChangeText={setEmail}
-                            autoCapitalize="none"
-                            keyboardType="email-address"
-                        />
-                        <Text>Password</Text>
-                        <TextInput
-                            style={styles.input}
-                            value={password}
-                            onChangeText={setPassword}
-                            autoCapitalize="none"
-                            keyboardType="visible-password"
-                            secureTextEntry
-                        />{" "}
+                        <View>
+                            <Text style={styles.inputTitle}>Email</Text>
+                            <TextInput
+                                style={styles.input}
+                                value={email}
+                                onChangeText={setEmail}
+                                autoCapitalize="none"
+                                keyboardType="email-address"
+                            />
+                            <Text style={styles.inputTitle}>Password</Text>
+                            <TextInput
+                                style={styles.input}
+                                value={password}
+                                onChangeText={setPassword}
+                                autoCapitalize="none"
+                                keyboardType="visible-password"
+                                secureTextEntry
+                            />
+                        </View>
+                        {" "}
                         {loading ? (
                             <ActivityIndicator />
                         ) : (
                             <React.Fragment>
-                                <TouchableOpacity
-                                    style={styles.button}
-                                    onPress={signUp}
-                                >
-                                    <Text style={styles.buttonText}>
-                                        Sign Up
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={[styles.button, styles.button]}
-                                    onPress={signIn}
-                                >
-                                    <Text style={styles.buttonText}>
-                                        Sign In
-                                    </Text>
-                                </TouchableOpacity>
+                                <View style={{}}>
+                                    <TouchableOpacity
+                                        style={styles.button}
+                                        onPress={signUp}
+                                    >
+                                        <Text style={styles.buttonText}>
+                                            Sign Up
+                                        </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={[styles.button, styles.button]}
+                                        onPress={signIn}
+                                    >
+                                        <Text style={styles.buttonText}>
+                                            Sign In
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+
                             </React.Fragment>
                         )}
                     </View>
@@ -99,6 +105,9 @@ const index = () => {
 export default index;
 
 const styles = StyleSheet.create({
+    inputTitle: {
+        color: "white"
+    },
     input: {
         marginHorizontal: 4,
         height: 50,
@@ -112,19 +121,24 @@ const styles = StyleSheet.create({
     mainView: {
         flex: 1,
         alignItems: "center",
+
     },
+
 
     fieldsView: {
         marginTop: 80,
-        paddingTop: 12,
+        paddingTop: 200,
+        flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: 30
     },
     button: {
-        backgroundColor: "#007bff",
+        backgroundColor: "#C7F000",
         paddingVertical: 12,
         borderRadius: 6,
         alignItems: "center",
         marginTop: 10,
         width: 350,
     },
-    buttonText: { color: "#fff", fontSize: 16, fontWeight: "bold" },
+    buttonText: { color: "black", fontSize: 16, fontWeight: "bold" },
 });

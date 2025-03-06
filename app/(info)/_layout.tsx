@@ -6,7 +6,8 @@ const Layout = () => {
     return (
         <Tabs>
             <Tabs.Screen options={{
-                tabBarStyle:{display:'none'}
+                tabBarStyle: { display: 'none' },
+                headerShown: false
             }} name='InformationScreen'></Tabs.Screen>
         </Tabs>
     )
