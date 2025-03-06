@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "558759533334",
+    "project_id": "education-ajay",
+    "storage_bucket": "education-ajay.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558759533334:android:c765d70ab26f64bfe0ce37",
+        "android_client_info": {
+          "package_name": "com.education.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558759533334-7k39f1rnoqe9i0opfvnqqoldo1ln5ip6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.education.firebase",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "558759533334-phm21pb7gvvaesjrh3tiehgg73st4242.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCejRpujDGRGEx3fa_PGBxuG0ilmC52nIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558759533334-phm21pb7gvvaesjrh3tiehgg73st4242.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "558759533334-jd0mui78h849t97d5gjh6bcise8geb94.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.education.firebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

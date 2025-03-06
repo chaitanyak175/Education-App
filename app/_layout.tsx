@@ -1,39 +1,51 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { Stack, useRouter, useSegments } from "expo-router";
+import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import * as SplashScreen from "expo-splash-screen";
+import React, { useEffect, useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+// Prevent splash screen auto-hide
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+    const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+    const [initializing, setInitializing] = useState(true);
+    const router = useRouter();
+    const segments = useSegments();
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    useEffect(() => {
+        const unsubscribe = auth().onAuthStateChanged((user) => {
+            console.log("onAuthStateChanged", user);
+            setUser(user);
+            setInitializing(false);
+            SplashScreen.hideAsync(); // Hide splash after auth check
+        });
+
+        return unsubscribe; // Cleanup
+    }, []);
+
+    useEffect(() => {
+        if (initializing) return;
+
+        const inAuthGroup = segments[0] === "(tabs)";
+
+        if (user && !inAuthGroup) {
+            console.log("Navigating to Home");
+            router.replace("/(tabs)/Home");
+        } else if (!user && inAuthGroup) {
+            console.log("Navigating to Index");
+            router.replace("/");
+        }
+    }, [user, initializing]);
+
+    if (initializing) {
+        return <LoadingScreen />;
     }
-  }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    return (
+        <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(tabs)" />
+        </Stack>
+    );
 }
