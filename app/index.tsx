@@ -46,7 +46,7 @@ const index = () => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
             <View style={styles.mainView}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.fieldsView}>
@@ -68,8 +68,7 @@ const index = () => {
                                 keyboardType="visible-password"
                                 secureTextEntry
                             />
-                        </View>
-                        {" "}
+                        </View>{" "}
                         {loading ? (
                             <ActivityIndicator />
                         ) : (
@@ -92,7 +91,6 @@ const index = () => {
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
-
                             </React.Fragment>
                         )}
                     </View>
@@ -106,7 +104,7 @@ export default index;
 
 const styles = StyleSheet.create({
     inputTitle: {
-        color: "white"
+        color: "white",
     },
     input: {
         marginHorizontal: 4,
@@ -121,19 +119,17 @@ const styles = StyleSheet.create({
     mainView: {
         flex: 1,
         alignItems: "center",
-
     },
-
 
     fieldsView: {
         marginTop: 80,
         paddingTop: 200,
         flex: 1,
         justifyContent: "space-between",
-        paddingBottom: 30
+        paddingBottom: 30,
     },
     button: {
-        backgroundColor: "#C7F000",
+        backgroundColor: "#27ae60",
         paddingVertical: 12,
         borderRadius: 6,
         alignItems: "center",
