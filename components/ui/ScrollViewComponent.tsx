@@ -47,7 +47,7 @@ export default ScrollViewComponent
 const styles = StyleSheet.create({
     flatList: {
         padding: 30,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         flexDirection: 'column',
         gap: 40,
         paddingVertical: 0
@@ -55,12 +55,21 @@ const styles = StyleSheet.create({
     },
     flatListElement: {
         paddingVertical: 20,
-        backgroundColor: '#C7F000',
+        backgroundColor: '#4287f5',
         borderRadius: 9,
         marginVertical: 7,
         paddingHorizontal: 20,
     },
     flatListTitle: {
-        fontSize: 20
+        fontSize: 20,
+        color:'white'
     }
 })
+
+
+
+<Question ID="1" Shortcut="Q1" Order="" ElementType="question" QuestionType="date" Anonymity="1" AllowDK="1" Translated="0" >
+<LongCaption></LongCaption>
+<Routings>
+</Routings>
+</Question>
