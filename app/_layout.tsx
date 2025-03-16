@@ -2,6 +2,7 @@ import { Stack, useRouter, useSegments } from "expo-router";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
+import { AppState } from "react-native";
 import LoadingScreen from "@/components/LoadingScreen";
 
 // Prevent splash screen auto-hide
@@ -13,6 +14,7 @@ export default function RootLayout() {
     const router = useRouter();
     const segments = useSegments();
 
+    // Handle authentication state changes
     useEffect(() => {
         const unsubscribe = auth().onAuthStateChanged((user) => {
             console.log("onAuthStateChanged", user);
@@ -24,6 +26,19 @@ export default function RootLayout() {
         return unsubscribe; // Cleanup
     }, []);
 
+    // Handle app state changes (sign out on close)
+    useEffect(() => {
+        const handleAppStateChange = (nextAppState: string) => {
+            if (nextAppState === "background" || nextAppState === "inactive") {
+                auth().signOut().catch((error) => console.log("Sign out error:", error));
+            }
+        };
+
+        const subscription = AppState.addEventListener("change", handleAppStateChange);
+        return () => subscription.remove();
+    }, []);
+
+    // Handle navigation
     useEffect(() => {
         if (initializing) return;
 
@@ -31,7 +46,7 @@ export default function RootLayout() {
 
         if (user && !inAuthGroup) {
             console.log("Navigating to Home");
-            router.replace("/(tabs)/Java");
+            router.replace("/(tabs)/Home");
         } else if (!user && inAuthGroup) {
             console.log("Navigating to Index");
             router.replace("/");
@@ -43,7 +58,7 @@ export default function RootLayout() {
     }
 
     return (
-        <Stack  screenOptions={{ headerShown: false }}>
+        <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" />
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="(info)" />

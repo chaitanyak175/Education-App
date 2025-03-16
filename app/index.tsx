@@ -46,7 +46,7 @@ const index = () => {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={styles.mainView}>
                 <KeyboardAvoidingView behavior="padding">
                     <View style={styles.fieldsView}>
@@ -106,7 +106,7 @@ export default index;
 
 const styles = StyleSheet.create({
     inputTitle: {
-        color: "white"
+        color: "black"
     },
     input: {
         marginHorizontal: 4,
@@ -114,9 +114,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 4,
         padding: 10,
-        backgroundColor: "#fff",
+        backgroundColor: "gray",
         marginVertical: 6,
         width: 350,
+        color: "white"
     },
     mainView: {
         flex: 1,
@@ -133,12 +134,12 @@ const styles = StyleSheet.create({
         paddingBottom: 30
     },
     button: {
-        backgroundColor: "#C7F000",
+        backgroundColor: "#4287f5",
         paddingVertical: 12,
         borderRadius: 6,
         alignItems: "center",
         marginTop: 10,
         width: 350,
     },
-    buttonText: { color: "black", fontSize: 16, fontWeight: "bold" },
+    buttonText: { color: "white", fontSize: 16, fontWeight: "bold" },
 });

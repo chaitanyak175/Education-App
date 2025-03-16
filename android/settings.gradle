@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'education-ajay'
+rootProject.name = 'Learn2Code'
 
 dependencyResolutionManagement {
   versionCatalogs {

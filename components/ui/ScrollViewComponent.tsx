@@ -62,14 +62,9 @@ const styles = StyleSheet.create({
     },
     flatListTitle: {
         fontSize: 20,
-        color:'white'
+        color: 'white'
     }
 })
 
 
 
-<Question ID="1" Shortcut="Q1" Order="" ElementType="question" QuestionType="date" Anonymity="1" AllowDK="1" Translated="0" >
-<LongCaption></LongCaption>
-<Routings>
-</Routings>
-</Question>
